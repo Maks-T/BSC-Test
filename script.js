@@ -4998,6 +4998,7 @@ class StatisticHTML {
 
     let cell = rowHeader.insertCell();
     cell.innerHTML = 'п/п';
+
     rowHeader.append(cell);
 
     cell = rowHeader.insertCell();

@@ -160,6 +160,10 @@ table thead td {
   cursor: pointer;
 }
 
+table thead td:first-child {
+  min-width: 10px;
+}
+
 table td {
   min-width: 64px;
   box-sizing: border-box;
