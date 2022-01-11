@@ -4997,6 +4997,10 @@ class StatisticHTML {
     const rowHeader = headerTable.insertRow(0);
 
     let cell = rowHeader.insertCell();
+    cell.innerHTML = 'п/п';
+    rowHeader.append(cell);
+
+    cell = rowHeader.insertCell();
     cell.innerHTML = '№ вопр.';
     rowHeader.append(cell);
 
@@ -5010,9 +5014,9 @@ class StatisticHTML {
 
     dataStatistic.questions.sort((a, b) => b.m - a.m);
 
-    dataStatistic.questions.forEach((ques) => {
+    dataStatistic.questions.forEach((ques, index) => {
       const row = elemTableStat.insertRow();
-
+      row.insertCell().innerHTML = index + 1;
       row.insertCell().innerHTML = ques.id;
       row.insertCell().innerHTML = ques.m;
       row.insertCell().innerHTML = ques.s;
