@@ -5351,14 +5351,33 @@ class App {
 
   async createExam() {
     await this.statistic.load();
+
+    let dataWithStatisctic = JSON.parse(JSON.stringify(data));
+
+    dataWithStatisctic = dataWithStatisctic.map((ques) => {
+      const findQuesStat = dataStatistic.questions.find(
+        (q) => q.id === ques.id
+      );
+
+      if (findQuesStat) {
+        return { ...ques, ...findQuesStat };
+      }
+
+      return { ...ques, s: 0, m: 0 };
+    });
+
+    dataWithStatisctic.sort((a, b) => a.s - b.s || b.m - a.m);
+
+    console.log('dataWithStatisctic', dataWithStatisctic);
+    /*
     let dataStatisticSort = JSON.parse(JSON.stringify(dataStatistic));
 
     dataStatisticSort.questions.sort((a, b) => a.s - b.s || b.m - a.m);
-    console.log('dataStatisticSort.questions  : ', dataStatisticSort.questions);
+    console.log('dataStatisticSort.questions  : ', dataStatisticSort.questions);*/
 
-    dataStatisticSort = dataStatisticSort.questions.slice(0, maxQ);
+    let dataStatisticSlice = dataWithStatisctic.slice(0, maxQ);
 
-    this.questions = dataStatisticSort.map((statQues) =>
+    this.questions = dataStatisticSlice.map((statQues) =>
       data.find((ques) => ques.id === statQues.id)
     );
 
